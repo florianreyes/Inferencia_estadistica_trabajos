@@ -1,0 +1,60 @@
+---
+title: "TP1_1_Reyes_Cantarovici"
+author: "Florian Reyes, Nicolas Cantarovici"
+date: "2022-08-23"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+### 1)
+
+##### P(X=5)=1/6
+
+##### E(X)=3.5=sum(1:6)\*1/6
+
+### 2) Creamos un dado. Es un vector con seis caras.
+
+```{r}
+dado=c(1,2,3,4,5,6)
+Nrep=1000 
+muchos_dados=sample(x=dado,size=Nrep,replace=TRUE)
+```
+
+### 3) Creamos el vector de frecuencia relativa y lo inicializamos con NA.
+
+```{r}
+frec_relativa_dado5_vec=rep(NA,Nrep) 
+for(i in 1:Nrep){
+frec_relativa_dado5_vec[i]=mean(muchos_dados[1:i]==5) }
+```
+
+# 4)5)6)
+
+```{r}
+plot(seq (1: Nrep),frec_relativa_dado5_vec,cex=0.1,ylim =c(0,5), xlab="repeticiones",ylab="frec rel",main="
+Frecuencia relativa de dado en 5") 
+
+promedios_dado_vec=rep(NA,Nrep) 
+for(i in 1:Nrep){ promedios_dado_vec[i]=mean(muchos_dados[1:i]) }
+
+points(seq(1:Nrep),promedios_dado_vec,cex=0.1,col="red") 
+```
+
+#Lo que podemos observar es que la frecuencia relativa de la aparicion
+del número 5 converge en probabilidad a 1/6 a medida que n-\>infinito.
+
+Esto es esperable, dado que al definir una bernoulli cuyo éxito es
+dado=5 por ley de los grandes numeros, el promedio de los éxitos de las
+tiradas debería tender a la esperanza de esa bernoulli que es 1\*1/6.
+
+### #Como podemos ver, los promedios de los valores de los dados #convergen a 3,5 a medida que aumentan las tiradas. Esto coincide #con la teoría dado que la LGN cuando n tiende a infinito el promedio #de las tiradas de los dados convergen en probabilidad a la esperanza.
+
+#7) Ngen=10
+
+for(i in 1:Ngen){
+muchos_dados=muchos_dados=sample(x=dado,size=Nrep,replace = TRUE)
+promedios_dado=rep(NA,Nrep) for(j in 1:Nrep){
+promedios_dado[j]=mean(muchos_dados[1:j]) }
+points(seq(1:Nrep),promedios_dado,cex =0.1,col=i) }
