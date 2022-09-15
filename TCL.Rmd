@@ -1,0 +1,101 @@
+---
+title: "TP2_1_Reyes_Cantarovici"
+author: "Florian Reyes, Nicolas Cantarovici"
+date: "2022-08-28"
+output: html_document
+---
+
+#### Ejercicio 1
+
+```{r}
+est1 <- function(a) {
+  estimador=2*mean(a)
+}
+
+est2 <- function(a) {
+  estimador2=max(a)
+}
+```
+
+###### a) y b)
+
+```{r}
+primera_muestra=c(1.17,1.75, 0.28, 2.56, 2.36, 0.36, 1.82, 0.24, 1.17, 1.86)
+est1_primera=est1(primera_muestra)
+est2_primera=est2(primera_muestra)
+est1_primera
+est2_primera
+
+segunda_muestra=c(0.66, 0.07, 0.62, 0.65, 1.33, 0.40, 1.17, 1.11, 2.01, 2.98)
+est1_segunda=est1(segunda_muestra)
+est2_segunda=est2(segunda_muestra)
+est1_segunda
+est2_segunda
+
+```
+
+#### Ejercicio 2
+
+##### a)
+
+```{r}
+
+Variables_5=replicate(1000,est1(runif(5,0,3)))
+hist(Variables_5,probability = TRUE, main="est1, 5 muestras",xlim=c(0,6),col="darkslateblue")
+
+Variables_30=replicate(1000,est1(runif(30,0,3)))
+hist(Variables_30,probability = TRUE, main="est1, 30 muestras",xlim=c(0,6),col="darkslateblue")
+
+Variables_50=replicate(1000,est1(runif(50,0,3)))
+hist(Variables_50,probability = TRUE, main="est1, 100 muestras",xlim=c(0,6),col="darkslateblue")
+
+
+```
+
+##### b) y c) La distribucion del estimador es mejor aproximada por una normal a medida que n aumenta. Esto tiene sentido dado que es un promedio. Para cada n es aproximadamente normal.
+
+#### Ejercicio 3
+
+##### a)
+
+```{r}
+
+Variables_5_est2=replicate(1000,est2(runif(5,0,3)))
+hist(Variables_5_est2,probability = TRUE, main="est2, 5 muestras",xlim=c(0,6),col="darkslateblue")
+
+Variables_30_est2=replicate(1000,est2(runif(30,0,3)))
+hist(Variables_30_est2,probability = TRUE, main="est2, 30 muestras",xlim=c(0,6),col="darkslateblue")
+
+Variables_50_est2=replicate(1000,est2(runif(50,0,3)))
+hist(Variables_50_est2,probability = TRUE, main="est2, 100 muestras",xlim=c(0,6),col="darkslateblue")
+
+
+```
+
+##### b) y c)
+
+La distribucion del estimador no es aproximadamente normal, no es un promedio sino que es un maximo, por ende a medida que n aumenta solo se concentra mas alrededor del 3.
+
+#### Ejercicio 4
+
+##### Eligiríamos el maximo, dado que esta mucho mas concentrada la probabilidad alrededor del 3 o cerca. Dado que tenemos una muestra finita, nos conviene mas el maximo dado que en un caso cualquiera tenemos mas probabilidad de caer mas cerca del 3 que con el 2\*promedio.
+
+```{r}
+
+par(mfrow=c(2,3))
+
+hist(Variables_5,probability = TRUE, main="est1, 5 muestras",xlim=c(0,6),col="darkslateblue")
+
+hist(Variables_30,probability = TRUE, main="est1, 30 muestras",xlim=c(0,6),col="darkslateblue")
+
+hist(Variables_50,probability = TRUE, main="est1, 100 muestras",xlim=c(0,6),col="darkslateblue")
+
+############################################################################
+
+hist(Variables_5_est2,probability = TRUE, main="est2, 5 muestras",xlim=c(0,6),col="darkorchid3")
+
+hist(Variables_30_est2,probability = TRUE, main="est2, 30 muestras",xlim=c(0,6),col="darkorchid3")
+
+hist(Variables_50_est2,probability = TRUE, main="est2, 100 muestras",xlim=c(0,6),col="darkorchid3")
+
+```

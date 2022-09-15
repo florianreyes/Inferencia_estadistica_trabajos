@@ -1,0 +1,47 @@
+---
+title: "TP3"
+author: "Florian Reyes, Nicolas Cantarovici"
+date: "2022-09-06"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+### Ejercicio 1
+
+```{r}
+ic_sigma_con <- function(datos, var, nivel){
+  alfa = 1-nivel
+  media = mean(datos)
+  q = qnorm(1-alfa/2)
+  n = length(datos)
+  se = sqrt(var/n)
+  a = media-q*se
+  b = media+ q*se
+  c(a,b)
+}
+
+```
+
+### Ejercicio 2
+
+-   60 pertenecerá al intervalo de confianza en un 95 porciento de los casos, esa es justamente la certeza que nos da el IC.
+
+```{r}
+set.seed(23)
+datos_normales = rnorm(5,60,5)
+ic_sigma_con(datos_normales, 25, 0.95)
+```
+
+### Ejercicio 3
+
+-   Este nivel de cubrimiento empírico debería aproximarse a 0,95. dado que el IC de nivel 0,95 nos asegura que si realizaramos el experimento infinitas veces, en el 95% de los casos el intervalo contendría el parametro. Como podemos ver, efectivamente se acerca .
+
+```{r}
+Nrep=10000
+cantidad_atrapados=replicate(Nrep,{
+  datos_normales=rnorm(5,60,5)
+  ic_sigma_con(datos_normales,25,0.95)[1]<60 & 60<ic_sigma_con(datos_normales,25,0.95)[2]
+})
+mean(cantidad_atrapados)
+```
